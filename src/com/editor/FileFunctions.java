@@ -22,7 +22,7 @@ public class FileFunctions {
         ifEdited = false;
     }
 
-    private static void appendString(JTextPane text, String str) throws BadLocationException {
+    public static void appendString(JTextPane text, String str) throws BadLocationException {
         StyledDocument doc = (StyledDocument)text.getDocument();
         doc.insertString(doc.getLength(), str, null);
     }
