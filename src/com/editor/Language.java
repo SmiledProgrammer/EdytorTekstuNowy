@@ -26,23 +26,19 @@ public class Language {
     private boolean highlightNumbers;
     private ArrayList<Character> acceptedCharacters;
 
-    private int index;
+    public int index = 0;
     public static String word;
-    private int newLines;
+    private int newLines = 0;
     private boolean modifiedIndex;
 
     public Language() {
         keywords = new HashMap<>();
-        sectionMarkers = new ArrayList<SectionMarker>();
+        sectionMarkers = new ArrayList<>();
         highlightNumbers = false;
         acceptedCharacters = new ArrayList<>();
     }
 
     private boolean isWhitespaceCharacter(char c) {
-        /*for (SectionMarker sm : sectionMarkers) {
-            if (c == sm.beginning || c == sm.ending)
-                return false;
-        }*/
         for (char ac : acceptedCharacters) {
             if (c == ac)
                 return false;
@@ -80,8 +76,7 @@ public class Language {
         doc.setCharacterAttributes(pos, length, sas, false);
     }
 
-    private void skipWhitespaceCharacters() {
-        String text = NotepadWindow.textPane.getText();
+    public void skipWhitespaceCharacters(String text) {
         char c;
         do { //szukanie początku słowa
             c = text.charAt(index++);
@@ -91,10 +86,10 @@ public class Language {
         index--;
     }
 
-    private void getNextWord() { //zwraca indeks znalezionego słowa; słowo zapisuje w statycznej zmiennej globalnej "word"; startingIndex to indeks, od którego zaczynane jest sprawdzanie
+    public void getNextWord(String text) { //zwraca indeks znalezionego słowa; słowo zapisuje w statycznej zmiennej globalnej "word"; startingIndex to indeks, od którego zaczynane jest sprawdzanie
         word = "";
-        String text = NotepadWindow.textPane.getText();
         int i = index;
+        System.out.println("i = " + i);
         char c = text.charAt(i++);
         while (!isWhitespaceCharacter(c) && i < text.length()) { //szukanie końca słowa
             word += c;
@@ -132,16 +127,13 @@ public class Language {
                         }
                         changeTextColor(startingIndex, length + 1, marker.color);
                         index++;
-                        //System.out.println("index = " + index + " ; " + text.charAt(startingIndex));
                     } else {
                         changeTextColor(index, 1, marker.color);
-                        //System.out.println(text.charAt(index));
                         index++;
                     }
                 } else if (text.charAt(index) == marker.ending) {
                     modifiedIndex = true;
                     changeTextColor(index, 1, marker.color);
-                    //System.out.println(text.charAt(index));
                     index++;
                 }
             }
@@ -165,10 +157,10 @@ public class Language {
         newLines = 0;
         while (index < text.length()) {
             modifiedIndex = false;
-            skipWhitespaceCharacters();
+            skipWhitespaceCharacters(NotepadWindow.textPane.getText());
             checkSections();
             if (!modifiedIndex) {
-                getNextWord(); // Pobieranie następnego słowa w tekście
+                getNextWord(NotepadWindow.textPane.getText()); // Pobieranie następnego słowa w tekście
                 checkKeywords(); // Słowa kluczowe
                 if (isNumeric(word) && highlightNumbers) // Liczby
                     changeTextColor(index, word.length(), Color.MAGENTA);
@@ -181,7 +173,6 @@ public class Language {
                     }
                 }
                 if (skipNextCharacter) index++;
-                System.out.println("index = " + index + " ; " + word);
             }
         }
     }
@@ -204,19 +195,6 @@ public class Language {
 
     public void setHighlightNumbers(boolean value) {
         highlightNumbers = value;
-    }
-
-    //do usunięcia potem
-    public static void main(String[] args) {
-        Language l = new Language();
-        String text = "Alamakota.\nno i jeszcze   psa!";
-        int index = -1;
-        l.word = "";
-        while (index + word.length() + 1 < text.length()) {
-            //index = l.getNextWord(index + word.length() + 1);
-            System.out.println(index + ". " + word);
-        }
-        System.out.println(text.charAt(11));
     }
 
 }

@@ -4,7 +4,7 @@ public class PatternFinder {
 
     private String text;
     private String pattern;
-    private int lastPosition;
+    private int lastPosition = 0;
     private int endOfLines = 0;
     public int[] prefixSuffixTable;
 
@@ -33,8 +33,9 @@ public class PatternFinder {
                 if (j + 1 == pattern.length())
                     return i - pattern.length() + 1;
             } else {
-                j = prefixSuffixTable[j] - 1;
-                i--;
+                j = prefixSuffixTable[j];
+                if (prefixSuffixTable[j] != 0)
+                    i--;
             }
         }
         return -1;
@@ -44,8 +45,12 @@ public class PatternFinder {
         //endOfLines = 0;
         if (lastPosition + pattern.length() < text.length()) {
             int pos = findPattern(lastPosition);
-            lastPosition = pos + 1;
-            return pos - endOfLines;
+            if (pos != -1) {
+                lastPosition = pos + 1;
+                return pos - endOfLines;
+            } else {
+                return -1;
+            }
         } else {
             return -1;
         }

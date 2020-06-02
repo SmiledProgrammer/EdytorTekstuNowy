@@ -50,6 +50,7 @@ public class FindWindow extends JFrame implements ActionListener {
             lastPattern = textField.getText();
         }
         int position = pf.findNext();
+        System.out.println("position = " + position);
         if (position == -1) {
             JOptionPane.showMessageDialog(null, "No more occurrences of the pattern in the text.");
             pf.setStrings(NotepadWindow.textPane.getText(), textField.getText());

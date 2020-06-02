@@ -1,3 +1,5 @@
+package com.test;
+
 import com.editor.PatternFinder;
 
 import org.junit.Assert;
@@ -17,8 +19,17 @@ public class PatternFinderTest {
     }
 
     @Test
-    public void findPattern() {
-        //napiszę potem
+    public void findNext() {
+        PatternFinder pf = new PatternFinder();
+        String text = "Ala ma kota, a kot ma ale, ala go kocha, a kot jej wcale.";
+        String pattern = "kot";
+        pf.setStrings(text, pattern);
+        int pos0 = pf.findNext();
+        int pos1 = pf.findNext();
+        int pos2 = pf.findNext();
+        Assert.assertEquals(pos0, 7);
+        Assert.assertEquals(pos1, 15);
+        Assert.assertEquals(pos2, 43);
     }
 
 }
