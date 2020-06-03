@@ -1,4 +1,4 @@
-package com.test;
+package com.editor;
 
 import com.editor.Language;
 import org.junit.Assert;

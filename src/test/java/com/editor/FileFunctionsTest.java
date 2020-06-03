@@ -1,16 +1,15 @@
+package com.editor;
 
-import com.editor.FileFunctions;
-
-import org.junit.*;
-import javax.swing.*;
-import com.editor.NotepadWindow;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
 
 @RunWith(Parameterized.class)
 public class FileFunctionsTest {
