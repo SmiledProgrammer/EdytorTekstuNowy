@@ -19,6 +19,16 @@ public class PatternFinderTest {
     }
 
     @Test
+    public void findPattern() {
+        PatternFinder pf = new PatternFinder();
+        String text = "Ala ma kota.";
+        String pattern = "kot";
+        pf.setStrings(text, pattern);
+        int pos = pf.findPattern(0);
+        Assert.assertEquals(pos, 7);
+    }
+
+    @Test
     public void findNext() {
         PatternFinder pf = new PatternFinder();
         String text = "Ala ma kota, a kot ma ale, ala go kocha, a kot jej wcale.";
