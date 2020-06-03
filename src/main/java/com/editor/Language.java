@@ -140,7 +140,7 @@ public class Language {
         }
     }
 
-    private boolean isNumeric(String str) {
+    public boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
             return true;

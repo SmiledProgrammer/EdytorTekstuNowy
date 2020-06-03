@@ -5,7 +5,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class LanguageTest {
-
+    @Test
+    public void isNumericTest() {
+        Language l = new Language();
+        Assert.assertTrue(l.isNumeric("1.3456"));
+        Assert.assertTrue(l.isNumeric("12"));
+        Assert.assertFalse(l.isNumeric("123a"));
+    }
     @Test
     public void skipWhitespaceCharacters() {
         Language l = new Language();
