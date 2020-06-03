@@ -23,7 +23,7 @@ sudo bash
 * zbuduj dockera z tagiem edytor-tekstu
 
 ```
-docker build --tag pio-edytor-tekstu .
+docker build --tag edytor-tekstu .
 ```
 
 * w nowym oknie uruchom komendę
