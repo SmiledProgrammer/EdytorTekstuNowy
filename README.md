@@ -26,7 +26,17 @@ sudo bash
 docker build --tag edytor-tekstu .
 ```
 
-* w nowym oknie uruchom komendę
+* uruchom dockera
+
+```
+docker run -v /tmp/.X11-unix/X0:/tmp/.X11-unix/X0 -e DISPLAY=$DISPLAY edytor-tekstu
+albo
+xhost +
+docker run -v /tmp/.X11-unix/X0:/tmp/.X11-unix/X0 -e DISPLAY=$DISPLAY edytor-tekstu
+```
+Jeżeli to nie działa można spróbować drugą opcję:
+
+* po zbudowaniu dockera, w nowym oknie uruchom komendę
 
 ```
 socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:/tmp/.X11-unix/X0

@@ -25,7 +25,6 @@ public class NotepadWindow extends Window implements Runnable {
         setupMenuBar();
         setVisible(true);
         ignoreNextEdit = false;
-        System.out.println(SwingUtilities.isEventDispatchThread());
     }
 
     public void MakeNotepadWindow() {
@@ -35,7 +34,7 @@ public class NotepadWindow extends Window implements Runnable {
             Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource("image/icon.png"));
             setIconImage(icon);
         } catch (Exception e) {
-            System.out.println("Can't find icon image - setting default icon");
+            System.out.println("Can't find/set icon image - setting default icon");
         }
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
